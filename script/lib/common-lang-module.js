@@ -361,9 +361,8 @@ define('__common_lang_text', ['__common_lang_string'], function (string) {
 
 define('__common_lang_lock', [], function () {
 
-    return function (fair) {
-        var _fair = fair || false;
-        var lock = new java.util.concurrent.locks.ReentrantLock(_fair);
+    return function () {
+        var lock = new java.util.concurrent.locks.ReentrantLock();
 
         return {
 

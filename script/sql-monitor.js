@@ -24,7 +24,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
         {
             test: function (advice) {
                 return /^com\.mysql\.jdbc\.PreparedStatement$/.test(advice.clazz.name)
-                    && /^(execute|executeQuery|executeUpdate|executeBatch|executeLargeBatch|executeLargeUpdate|)$/.test(advice.method.name)
+                    && /^(execute|executeQuery|executeUpdate|executeBatch|executeLargeBatch|executeLargeUpdate)$/.test(advice.method.name)
             },
 
             parse: function (advice) {

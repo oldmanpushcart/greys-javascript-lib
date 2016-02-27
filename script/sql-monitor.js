@@ -33,7 +33,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
                 }
 
                 else if (advice.params[0]
-                    && lang.string.equals(lang.java.clazz.name(adviec.params[0]), 'java.lang.String')
+                    && lang.string.equals(lang.java.clazz.name(advice.params[0]), 'java.lang.String')
                     && lang.string.isNotBlank("" + advice.params[0])) {
                     return "" + advice.params[0];
                 }

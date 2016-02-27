@@ -32,7 +32,9 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
                     return advice.target.getNonRewrittenSql();
                 }
 
-                else if (advice.params[0] && lang.string.isNotBlank("" + advice.params[0])) {
+                else if (advice.params[0]
+                    && lang.string.equals(lang.java.clazz.name(adviec.params[0]), 'java.lang.String')
+                    && lang.string.isNotBlank("" + advice.params[0])) {
                     return "" + advice.params[0];
                 }
 
@@ -63,7 +65,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
                 padding: 1,
                 columns: [
                     {
-                        width: 20,
+                        width: 22,
                         vertical: 'middle',
                         horizontal: 'left'
                     },

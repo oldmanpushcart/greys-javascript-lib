@@ -4,18 +4,25 @@ __greys_require({
         stats: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/stream-statistics-module.js',
         lang: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/common-lang-module.js',
         scheduler: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/scheduler-module.js',
+        asf: 'https://raw.githubusercontent.com/sonota88/anbt-sql-formatter.js/master/anbt-sql-formatter.js',
     }
 })
 
 /**
  * 模版
  */
-__greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys, lang, tui, stats, scheduler) {
+__greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'asf'], function (greys, lang, tui, stats, scheduler, asf) {
 
     // 监控数据(K(id):V(stats,sql))
     var monitor = {};
     var timer;
     var lock = new lang.lock();
+
+    // sql-format
+    var rule = new asf.anbtSqlFormatter.Rule();
+    rule.functionNames.push("DATE");
+    rule.kw_minus1_indent_nl_kw_plus1_indent.push("LIMIT");
+    var sqlFormatter = new asf.anbtSqlFormatter.Formatter(rule);
 
     // Statement解析器
     var parsers = [
@@ -116,7 +123,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
                 var report = stat.stats();
                 table.row(
                     "" + timestamp,
-                    "" + sql,
+                    "" + sqlFormatter.format(sql),
                     "" + report[0],
                     "" + report[1],
                     "" + report[2],

@@ -1,3 +1,13 @@
+/*
+ * SQL monitor
+ * 用于检测SQL访问监控脚本
+ *
+ * 目前支持MySQL-JDBC-Connector
+ *
+ * @author : oldmanpushcart@gmail.com
+ */
+
+
 __greys_require({
     paths: {
         tui: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/text-formatting-module.js',

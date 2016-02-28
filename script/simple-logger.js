@@ -54,7 +54,7 @@ __greys_require(['greys', 'lang'], function (greys, lang) {
     }
 
     function finish(output, advice, context) {
-        var content = "{0} : cost={1}ms;".format(prefix(advice), context.cost);
+        var content = lang.string.format("{0} : cost={1}ms;", prefix(advice), context.cost);
 
         // 拼装参数列表
         if (advice.params.length > 0) {

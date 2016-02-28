@@ -69,7 +69,7 @@ __greys_require(['greys', 'lang'], function (greys, lang) {
                         }
                     })
                     return paramString;
-                }
+                }()
             );
         }
 

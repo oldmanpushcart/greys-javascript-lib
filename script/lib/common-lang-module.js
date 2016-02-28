@@ -224,6 +224,22 @@ define('__common_lang_string', function () {
             return wrapString;
         },
 
+        /**
+         * 字符串格式化
+         * format('{0} is dead, but {1} is alive! {0} {2}', 'ASP', 'ASP.NET');
+         * @param format
+         * @returns {XML|string|void}
+         */
+        format: function (format) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            return format.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] != 'undefined'
+                    ? args[number]
+                    : match
+                    ;
+            });
+        },
+
     }
 })
 

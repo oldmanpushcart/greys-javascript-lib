@@ -1,4 +1,4 @@
-__greys_require({
+require({
     paths: {
         'common-lang': 'https://raw.githubusercontent.com/oldmanpushcart/greys-anatomy/master/scripts/common-lang-module.js',
     }
@@ -18,7 +18,7 @@ function stringBlank(lang, length) {
  * box-formatting
  * 定义一个容器(box),容器是所有文本组件的基础
  */
-__greys_define('text-box-formatting', ['common-lang'], function (lang) {
+define('text-box-formatting', ['common-lang'], function (lang) {
 
     return function (content) {
 

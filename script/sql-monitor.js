@@ -185,10 +185,14 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
 
     }
 
-    greys.watching({
-        create: _create,
-        destroy: _destroy,
-        returning: finish,
-        throwing: finish,
-    });
+    greys.watching(
+        /^java\.sql\.PreparedStatement$/,
+        /^execute.*$/,
+        {
+            create: _create,
+            destroy: _destroy,
+            returning: finish,
+            throwing: finish,
+        }
+    );
 })

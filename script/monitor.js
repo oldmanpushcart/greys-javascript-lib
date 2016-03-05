@@ -19,6 +19,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], funct
     var lock = new lang.lock();
 
     function _create(output) {
+        console.log("script create invoke");
         timer = new scheduler();
         timer.setInterval(function () {
 
@@ -112,10 +113,13 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], funct
     }
 
     function _destroy() {
+        console.log("script destroy invoke");
         timer.shutdown();
     }
 
     function finish(output, advice, context) {
+
+        console.log("script finish invoke");
 
         var id = advice.clazz.name + "#" + advice.method.name;
 

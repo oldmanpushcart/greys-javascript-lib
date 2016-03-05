@@ -8,15 +8,13 @@ require({
     }
 });
 
-
-define(['common-lang'], function (lang) {
+require(['common-lang'], function (lang) {
 
     function log() {
         var string = lang.string.format(arguments);
         java.lang.System.out.println(string);
     }
 
-    return {
-        log: log,
-    }
+    exports.log = log;
+
 })

@@ -4,13 +4,14 @@ __greys_require({
         stats: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/stream-statistics-module.js',
         lang: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/common-lang-module.js',
         scheduler: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/scheduler-module.js',
+        console: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/console.js',
     }
 })
 
 /**
  * 模版
  */
-__greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys, lang, tui, stats, scheduler) {
+__greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], function (greys, lang, tui, stats, scheduler, console) {
 
     // 监控数据(K(id):V(stats,id))
     var monitor = {};
@@ -20,6 +21,8 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
     function _create(output) {
         timer = new scheduler();
         timer.setInterval(function () {
+
+            console.log("timer as invoking");
 
             var _monitor;
             lock.lock();

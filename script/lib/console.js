@@ -11,7 +11,7 @@ require({
 require(['common-lang'], function (lang) {
 
     function log() {
-        var string = lang.string.format(arguments);
+        var string = lang.string.format.apply(this, arguments);
         java.lang.System.out.println(string);
     }
 

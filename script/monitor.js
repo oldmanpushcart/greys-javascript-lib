@@ -106,7 +106,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys,
 
             output.println(table.rendering());
 
-        }, 10000);
+        }, 1000*60);
     }
 
     function _destroy() {

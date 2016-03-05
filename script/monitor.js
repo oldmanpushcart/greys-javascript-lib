@@ -108,7 +108,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], funct
 
             output.println(table.rendering());
 
-        }, 1000 * 60);
+        }, 10000);
     }
 
     function _destroy() {

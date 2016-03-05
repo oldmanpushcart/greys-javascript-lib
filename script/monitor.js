@@ -4,14 +4,13 @@ __greys_require({
         stats: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/stream-statistics-module.js',
         lang: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/common-lang-module.js',
         scheduler: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/scheduler-module.js',
-        console: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/console.js',
     }
 })
 
 /**
  * 模版
  */
-__greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], function (greys, lang, tui, stats, scheduler, console) {
+__greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys, lang, tui, stats, scheduler) {
 
     // 监控数据(K(id):V(stats,id))
     var monitor = {};
@@ -19,13 +18,11 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], funct
     var lock = new lang.lock();
 
     function _create(output) {
-        console.log("script create invoke");
         timer = new scheduler();
         timer.setInterval(function () {
 
-            console.log("timer as invoking");
-
             var _monitor;
+
             lock.lock();
             try {
                 _monitor = monitor;
@@ -45,7 +42,7 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], funct
                         horizontal: 'left'
                     },
                     {
-                        width: 80,
+                        width: 50,
                         vertical: 'middle',
                         horizontal: 'left'
                     },
@@ -91,13 +88,13 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], funct
             table.row('TIMESTAMP', 'CLASS', 'METHOD', 'TOTAL', 'SUCCESS', 'FAIL', 'RT', 'RT-MIN', 'RT-MAX');
             var timestamp = lang.date.format(new Date(), 'yyyy-MM-dd hh:mm:ss');
 
-            for (var sql in _monitor) {
-                var stat = _monitor[sql];
-                var report = stat.stats();
+            for (var id in _monitor) {
+                var statData = _monitor[id];
+                var report = statData.stat.stats();
                 table.row(
                     "" + timestamp,
-                    "" + clazz,
-                    "" + method,
+                    "" + statData.clazz,
+                    "" + statData.method,
                     "" + report[0],
                     "" + report[1],
                     "" + report[2],
@@ -113,31 +110,32 @@ __greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler', 'console'], funct
     }
 
     function _destroy() {
-        console.log("script destroy invoke");
         timer.shutdown();
     }
 
     function finish(output, advice, context) {
 
-        console.log("script finish invoke");
-
         var id = advice.clazz.name + "#" + advice.method.name;
 
         lock.lock();
         try {
-            var stat = monitor[id];
-            if (!stat) {
-                stat = monitor[id] = stats.create([
-                    stats.SUM,
-                    stats.SUM,
-                    stats.SUM,
-                    stats.AVG,
-                    stats.MIN,
-                    stats.MAX,
-                ]);
+            var statData = monitor[id];
+            if (!statData) {
+                statData = monitor[id] = {
+                    stat: stats.create([
+                        stats.SUM,
+                        stats.SUM,
+                        stats.SUM,
+                        stats.AVG,
+                        stats.MIN,
+                        stats.MAX,
+                    ]),
+                    clazz: advice.clazz.name,
+                    method: advice.method.name
+                }
             }
 
-            stat.stats(
+            statData.stat.stats(
                 1,
                 advice.isReturning ? 1 : 0,
                 advice.isThrowing ? 1 : 0,

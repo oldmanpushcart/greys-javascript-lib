@@ -4,13 +4,13 @@
  * @author : oldmanpushcart@gmail.com
  */
 
-__greys_require({
+require({
     paths: {
         lang: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/common-lang-module.js',
     }
 })
 
-__greys_require(['greys', 'lang'], function (greys, lang) {
+require(['greys', 'lang'], function (greys, lang) {
 
     /**
      * 获取当前系统时间戳

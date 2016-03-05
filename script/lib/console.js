@@ -4,7 +4,7 @@
  */
 require({
     paths: {
-        'common-lang': 'https://raw.githubusercontent.com/oldmanpushcart/greys-anatomy/master/scripts/lib/common-lang-module.js',
+        'common-lang': 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/common-lang-module.js',
     }
 });
 

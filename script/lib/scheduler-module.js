@@ -4,7 +4,13 @@
 
 module.exports = function () {
 
-    var executor = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
+    var executor = java.util.concurrent.Executors.newSingleThreadScheduledExecutor(
+        new java.util.concurrent.ThreadFactory({
+            newThread: function (r) {
+                return new java.lang.Thread(r, 'javascript-lib-scheduler-timer');
+            }
+        })
+    );
     var counter = 1;
     var ids = {};
 

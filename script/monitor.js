@@ -1,4 +1,4 @@
-__greys_require({
+require({
     paths: {
         tui: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/text-formatting-module.js',
         stats: 'https://raw.githubusercontent.com/oldmanpushcart/greys-javascript-lib/master/script/lib/stream-statistics-module.js',
@@ -10,7 +10,7 @@ __greys_require({
 /**
  * 模版
  */
-__greys_require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys, lang, tui, stats, scheduler) {
+require(['greys', 'lang', 'tui', 'stats', 'scheduler'], function (greys, lang, tui, stats, scheduler) {
 
     // 监控数据(K(id):V(stats,id))
     var monitor = {};
